@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DIRTBAG BICYCLES</title>
-  <meta name="description" content="Dirtbag Bicycles — South Orange County, CA">
+  <meta name="description" content="Dirtbag Bicycles — cheap bikes, dirty kit, after-work laps. South Orange County, CA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -22,17 +22,24 @@
       90% { transform: translate(-1%, 1%) }
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    html { height: 100%; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { height: 100%; scroll-behavior: smooth; }
 
     body {
       background: #0d0d0d;
       color: #e8e2db;
       font-family: 'Space Mono', monospace;
       min-height: 100%;
-      display: flex;
-      flex-direction: column;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       position: relative;
@@ -59,38 +66,68 @@
       color: #0d0d0d;
     }
 
-    .page {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 0 24px;
-      width: 100%;
-      flex: 1;
+    /* ——— HERO ——— */
+    .hero {
+      position: relative;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-top: 15vh;
-      padding-bottom: 40px;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+      overflow: hidden;
     }
 
-    /* ——— WORDMARK ——— */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?w=1920&q=80') center/cover no-repeat;
+      z-index: 0;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,13,13,0.55) 0%,
+        rgba(13,13,13,0.7) 50%,
+        rgba(13,13,13,0.95) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .hero .chain-icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 32px;
+      opacity: 0.25;
+      animation: fadeIn 1s ease 0.2s both;
+    }
+
     .wordmark {
-      margin-bottom: 56px;
+      margin-bottom: 24px;
       user-select: none;
+      animation: fadeUp 0.8s ease 0.3s both;
     }
 
     .wordmark-main {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(72px, 18vw, 110px);
+      font-size: clamp(72px, 16vw, 130px);
       line-height: 0.85;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       color: #e8e2db;
-      position: relative;
     }
 
-    .wordmark-main span {
-      display: block;
-    }
+    .wordmark-main span { display: block; }
 
     .wordmark-main .w-bicycles {
       font-size: 0.72em;
@@ -106,69 +143,289 @@
       font-weight: 400;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: #444;
+      color: #666;
       margin-top: 16px;
     }
 
-    /* ——— TAGLINE ——— */
-    .tagline {
-      font-size: 13px;
+    .hero-tagline {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: #c8a96e;
+      letter-spacing: 0.06em;
+      margin-bottom: 48px;
+      animation: fadeUp 0.8s ease 0.5s both;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #444;
+      animation: fadeIn 1s ease 1.2s both;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 32px;
+      background: #333;
+      margin: 10px auto 0;
+    }
+
+    /* ——— SECTIONS ——— */
+    .section {
+      padding: 80px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 32px;
+    }
+
+    /* ——— SCROLL REVEAL ——— */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ——— BRAND INTRO ——— */
+    .intro {
+      padding: 100px 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .intro-text {
+      font-size: clamp(16px, 2.2vw, 20px);
+      line-height: 1.7;
+      color: #999;
+    }
+
+    .intro-text strong {
+      color: #e8e2db;
+      font-weight: 700;
+    }
+
+    /* ——— STATS BAR ——— */
+    .stats-bar {
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 40px 24px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 40px;
+    }
+
+    .stat {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.05em;
       color: #555;
-      margin-bottom: 56px;
-      line-height: 1.5;
     }
 
-    /* ——— NAV LINKS ——— */
-    nav {
-      margin-bottom: 56px;
+    .stat b {
+      color: #c8a96e;
+      font-weight: normal;
     }
 
-    nav a {
+    .stat-divider {
+      color: #222;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    /* ——— PRODUCT GRID ——— */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .product-card {
+      border: 1px solid #1a1a1a;
+      padding: 32px 24px;
+      position: relative;
+      transition: border-color 0.3s ease;
+      background: #111;
+    }
+
+    .product-card:hover {
+      border-color: #333;
+    }
+
+    .product-badge {
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #0d0d0d;
+      background: #c8a96e;
+      padding: 4px 10px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .product-type {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .product-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.03em;
+      color: #e8e2db;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .product-price {
+      font-size: 13px;
+      color: #8b7355;
+      letter-spacing: 0.08em;
+    }
+
+    .product-swatch {
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #4a5338, #8b7355, #c8a96e);
+      margin-top: 24px;
+      opacity: 0.4;
+    }
+
+    /* ——— TRAILS ——— */
+    .trails-section {
+      padding: 80px 0;
+      overflow: hidden;
+    }
+
+    .trails-label {
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 32px;
+      padding: 0 24px;
+    }
+
+    .trails-scroll {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0 24px;
+    }
+
+    .trails-scroll::-webkit-scrollbar { display: none; }
+
+    .trail-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 10vw, 80px);
+      color: #1a1a1a;
+      white-space: nowrap;
+      padding: 0 24px;
+      transition: color 0.3s ease;
+      cursor: default;
+      flex-shrink: 0;
+    }
+
+    .trail-item:hover {
+      color: #4a5338;
+    }
+
+    .trail-divider {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 10vw, 80px);
+      color: #141414;
+      flex-shrink: 0;
+    }
+
+    /* ——— PARALLAX SECTION ——— */
+    .parallax-break {
+      position: relative;
+      height: 50vh;
+      min-height: 300px;
+      overflow: hidden;
+    }
+
+    .parallax-break-bg {
+      position: absolute;
+      inset: -20%;
+      background: url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80') center/cover no-repeat;
+    }
+
+    .parallax-break-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,13,13,0.85) 0%,
+        rgba(13,13,13,0.6) 50%,
+        rgba(13,13,13,0.85) 100%
+      );
+    }
+
+    .parallax-break-text {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 18px 0;
-      text-decoration: none;
-      font-family: 'Space Mono', monospace;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .parallax-break-text p {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 6vw, 56px);
+      letter-spacing: 0.06em;
+      color: #e8e2db;
+      opacity: 0.6;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    /* ——— EMAIL SECTION ——— */
+    .email-section {
+      padding: 100px 24px;
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .email-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    .email-sub {
       font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      border-bottom: 1px solid #1a1a1a;
-      transition: all 0.2s ease;
-    }
-
-    nav a:first-child {
-      border-top: 1px solid #1a1a1a;
-    }
-
-    nav a:hover {
-      color: #fff;
-      padding-left: 8px;
-    }
-
-    nav a .meta {
-      font-weight: 400;
-      font-size: 10px;
-      color: #333;
-      letter-spacing: 0.15em;
-    }
-
-    nav a:hover .meta {
       color: #555;
-    }
-
-    /* ——— EMAIL ——— */
-    .email-block {
-      margin-bottom: 64px;
-    }
-
-    .email-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.3em;
-      color: #333;
-      margin-bottom: 14px;
+      margin-bottom: 32px;
+      letter-spacing: 0.05em;
     }
 
     .email-form {
@@ -194,9 +451,7 @@
       min-width: 0;
     }
 
-    .email-form input::placeholder {
-      color: #333;
-    }
+    .email-form input::placeholder { color: #333; }
 
     .email-form button {
       padding: 16px 24px;
@@ -227,42 +482,69 @@
       display: none;
     }
 
-    /* ——— TRAILS ——— */
-    .trails {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      margin-bottom: 40px;
+    /* ——— INSTAGRAM CTA ——— */
+    .ig-cta {
+      border-top: 1px solid #1a1a1a;
+      padding: 80px 24px;
+      text-align: center;
     }
 
-    .trails span {
-      font-size: 10px;
-      letter-spacing: 0.2em;
+    .ig-cta-label {
+      font-size: 9px;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: #222;
-      padding: 6px 0;
+      color: #444;
+      margin-bottom: 24px;
     }
 
-    .trails span::after {
-      content: '\00a0\00a0/\00a0\00a0';
-      color: #1a1a1a;
+    .ig-cta a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 8vw, 64px);
+      text-decoration: none;
+      color: #e8e2db;
+      transition: color 0.3s ease;
+      display: inline-block;
     }
 
-    .trails span:last-child::after {
-      content: '';
+    .ig-cta a:hover {
+      color: #c8a96e;
     }
 
-    /* ——— CHAIN SVG ——— */
-    .chain-icon {
-      width: 28px;
-      height: 28px;
-      margin-bottom: 56px;
-      opacity: 0.12;
+    .ig-cta-sub {
+      font-size: 12px;
+      color: #555;
+      letter-spacing: 0.1em;
+      margin-top: 12px;
     }
 
     /* ——— FOOTER ——— */
     footer {
-      padding: 32px 24px;
+      border-top: 1px solid #1a1a1a;
+      padding: 48px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: #e8e2db; }
+
+    .footer-copy {
       font-size: 9px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
@@ -272,122 +554,195 @@
 
     /* ——— MOBILE ——— */
     @media (max-width: 520px) {
-      .page {
-        padding-top: 10vh;
+      .stats-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .stat-divider { display: none; }
+
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
       }
 
-      .wordmark-main {
-        font-size: clamp(62px, 16vw, 90px);
-      }
+      .product-card { padding: 24px 16px; }
+      .product-name { font-size: 22px; }
 
       .email-form {
         flex-direction: column;
         border: none;
       }
-
       .email-form input[type="email"] {
         border: 1px solid #222;
         border-bottom: none;
         padding: 18px 16px;
       }
-
-      .email-form:focus-within input[type="email"] {
-        border-color: #444;
-      }
-
+      .email-form:focus-within input[type="email"] { border-color: #444; }
       .email-form button {
         border: 1px solid #222;
         border-left: 1px solid #222;
         padding: 18px 16px;
         text-align: center;
       }
+      .email-form:focus-within button { border-color: #444; }
+    }
 
-      .email-form:focus-within button {
-        border-color: #444;
+    @media (max-width: 380px) {
+      .products-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    /* kill all transitions on load */
-    .no-transition * {
-      transition: none !important;
-    }
+    /* kill transitions on load */
+    .no-transition * { transition: none !important; }
   </style>
 </head>
 <body class="no-transition">
 
-  <div class="page">
+  <!-- ——— HERO ——— -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <svg class="chain-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="44" stroke="#e8e2db" stroke-width="3"/>
+        <circle cx="50" cy="50" r="16" stroke="#e8e2db" stroke-width="3"/>
+        <circle cx="50" cy="50" r="4" fill="#e8e2db"/>
+        <g stroke="#e8e2db" stroke-width="2.5" stroke-linecap="round">
+          <line x1="50" y1="2" x2="50" y2="10"/>
+          <line x1="73.5" y1="7.7" x2="69.8" y2="15.2"/>
+          <line x1="90.5" y1="26.5" x2="83.5" y2="31"/>
+          <line x1="98" y1="50" x2="90" y2="50"/>
+          <line x1="90.5" y1="73.5" x2="83.5" y2="69"/>
+          <line x1="73.5" y1="92.3" x2="69.8" y2="84.8"/>
+          <line x1="50" y1="98" x2="50" y2="90"/>
+          <line x1="26.5" y1="92.3" x2="30.2" y2="84.8"/>
+          <line x1="9.5" y1="73.5" x2="16.5" y2="69"/>
+          <line x1="2" y1="50" x2="10" y2="50"/>
+          <line x1="9.5" y1="26.5" x2="16.5" y2="31"/>
+          <line x1="26.5" y1="7.7" x2="30.2" y2="15.2"/>
+        </g>
+      </svg>
 
-    <!-- chainring icon -->
-    <svg class="chain-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="44" stroke="#e8e2db" stroke-width="3"/>
-      <circle cx="50" cy="50" r="16" stroke="#e8e2db" stroke-width="3"/>
-      <circle cx="50" cy="50" r="4" fill="#e8e2db"/>
-      <!-- teeth -->
-      <g stroke="#e8e2db" stroke-width="2.5" stroke-linecap="round">
-        <line x1="50" y1="2" x2="50" y2="10"/>
-        <line x1="73.5" y1="7.7" x2="69.8" y2="15.2"/>
-        <line x1="90.5" y1="26.5" x2="83.5" y2="31"/>
-        <line x1="98" y1="50" x2="90" y2="50"/>
-        <line x1="90.5" y1="73.5" x2="83.5" y2="69"/>
-        <line x1="73.5" y1="92.3" x2="69.8" y2="84.8"/>
-        <line x1="50" y1="98" x2="50" y2="90"/>
-        <line x1="26.5" y1="92.3" x2="30.2" y2="84.8"/>
-        <line x1="9.5" y1="73.5" x2="16.5" y2="69"/>
-        <line x1="2" y1="50" x2="10" y2="50"/>
-        <line x1="9.5" y1="26.5" x2="16.5" y2="31"/>
-        <line x1="26.5" y1="7.7" x2="30.2" y2="15.2"/>
-      </g>
-    </svg>
-
-    <div class="wordmark">
-      <div class="wordmark-main">
-        <span>Dirtbag</span>
-        <span class="w-bicycles">Bicycles</span>
+      <div class="wordmark">
+        <div class="wordmark-main">
+          <span>Dirtbag</span>
+          <span class="w-bicycles">Bicycles</span>
+        </div>
+        <div class="wordmark-loc">so. orange county, ca</div>
       </div>
-      <div class="wordmark-loc">so. orange county, ca</div>
+
+      <p class="hero-tagline">cheap bikes. dirty kit. after-work laps.</p>
     </div>
+    <div class="hero-scroll">scroll</div>
+  </section>
 
-    <p class="tagline">cheap bikes. dirty kit. after-work laps.</p>
-
-    <nav>
-      <a href="https://instagram.com/dirtbag.bicycles" target="_blank" rel="noopener">
-        <span>Instagram</span>
-        <span class="meta">@dirtbag.bicycles</span>
-      </a>
-      <a href="#" onclick="return false">
-        <span>Shop</span>
-        <span class="meta">coming soon</span>
-      </a>
-      <a href="#" onclick="return false">
-        <span>Tees</span>
-        <span class="meta">soon</span>
-      </a>
-      <a href="#" onclick="return false">
-        <span>Socks</span>
-        <span class="meta">soon</span>
-      </a>
-    </nav>
-
-    <div class="email-block">
-      <div class="email-label">first to know</div>
-      <form class="email-form" id="sf">
-        <input type="email" name="email" placeholder="email" autocomplete="email" required>
-        <button type="submit">notify me</button>
-      </form>
-      <div class="email-msg" id="msg"></div>
-    </div>
-
-    <div class="trails">
-      <span>Aliso Woods</span>
-      <span>Las Ramblas</span>
-      <span>Laguna</span>
-      <span>San Clemente</span>
-      <span>Black Star</span>
-    </div>
-
+  <!-- ——— BRAND INTRO ——— -->
+  <div class="intro reveal">
+    <p class="intro-text">
+      Mountain bike culture for the riders who actually ride. After-work laps. Lunch break shreds. Tuesday evening therapy on two wheels. <strong>South Orange County, CA.</strong>
+    </p>
   </div>
 
-  <footer>dirtbag bicycles mmxxvi</footer>
+  <!-- ——— STATS BAR ——— -->
+  <div class="stats-bar reveal">
+    <span class="stat"><b>161K+</b> views</span>
+    <span class="stat-divider">/</span>
+    <span class="stat"><b>591</b> riders</span>
+    <span class="stat-divider">/</span>
+    <span class="stat"><b>97%</b> organic reach</span>
+    <span class="stat-divider">/</span>
+    <span class="stat"><b>@dirtbag.bicycles</b></span>
+  </div>
+
+  <!-- ——— PRODUCTS ——— -->
+  <div class="section">
+    <div class="section-label reveal">dropping soon</div>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-badge">Coming Soon</div>
+        <div class="product-type">Tee</div>
+        <div class="product-name">Shop Tee</div>
+        <div class="product-price">$32</div>
+        <div class="product-swatch"></div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-badge">Coming Soon</div>
+        <div class="product-type">Tee</div>
+        <div class="product-name">Tagline Tee</div>
+        <div class="product-price">$32</div>
+        <div class="product-swatch"></div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-badge">Coming Soon</div>
+        <div class="product-type">Tee</div>
+        <div class="product-name">Tuesday Laps Club</div>
+        <div class="product-price">$34</div>
+        <div class="product-swatch"></div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-badge">Coming Soon</div>
+        <div class="product-type">Hat</div>
+        <div class="product-name">Rope Hat</div>
+        <div class="product-price">$34</div>
+        <div class="product-swatch"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ——— TRAILS ——— -->
+  <div class="trails-section">
+    <div class="trails-label reveal">local dirt</div>
+    <div class="trails-scroll">
+      <span class="trail-item">Aliso Woods</span>
+      <span class="trail-divider">/</span>
+      <span class="trail-item">Las Ramblas</span>
+      <span class="trail-divider">/</span>
+      <span class="trail-item">Laguna</span>
+      <span class="trail-divider">/</span>
+      <span class="trail-item">San Clemente</span>
+      <span class="trail-divider">/</span>
+      <span class="trail-item">Black Star</span>
+    </div>
+  </div>
+
+  <!-- ——— PARALLAX BREAK ——— -->
+  <div class="parallax-break">
+    <div class="parallax-break-bg"></div>
+    <div class="parallax-break-text">
+      <p>Tuesday evening therapy on two wheels</p>
+    </div>
+  </div>
+
+  <!-- ——— EMAIL SIGNUP ——— -->
+  <div class="email-section reveal">
+    <div class="email-heading">First to know</div>
+    <div class="email-sub">Drops, rides, local events. No spam.</div>
+    <form class="email-form" id="sf">
+      <input type="email" name="email" placeholder="email" autocomplete="email" required>
+      <button type="submit">notify me</button>
+    </form>
+    <div class="email-msg" id="msg"></div>
+  </div>
+
+  <!-- ——— INSTAGRAM CTA ——— -->
+  <div class="ig-cta reveal">
+    <div class="ig-cta-label">follow the dirt</div>
+    <a href="https://instagram.com/dirtbag.bicycles" target="_blank" rel="noopener">@dirtbag.bicycles</a>
+    <div class="ig-cta-sub">Rides, kit, and local trail content</div>
+  </div>
+
+  <!-- ——— FOOTER ——— -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://instagram.com/dirtbag.bicycles" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" onclick="return false">Shop</a>
+      <a href="#" onclick="return false">Tees</a>
+      <a href="#" onclick="return false">Socks</a>
+      <a href="#" onclick="return false">Contact</a>
+    </div>
+    <div class="footer-copy">dirtbag bicycles mmxxvi</div>
+  </footer>
 
   <script>
     // remove no-transition class after paint
@@ -397,6 +752,20 @@
       });
     });
 
+    // scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // email signup
     const form = document.getElementById('sf');
     const msg = document.getElementById('msg');
     const btn = form.querySelector('button');
