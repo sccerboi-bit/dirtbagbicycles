@@ -4,275 +4,377 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DIRTBAG BICYCLES</title>
-  <meta name="description" content="Dirtbag Bicycles. South Orange County, CA. Apparel and MTB.">
+  <meta name="description" content="Dirtbag Bicycles — South Orange County, CA">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0) }
+      10% { transform: translate(-2%, -3%) }
+      20% { transform: translate(3%, 1%) }
+      30% { transform: translate(-1%, 2%) }
+      40% { transform: translate(2%, -2%) }
+      50% { transform: translate(-3%, 3%) }
+      60% { transform: translate(1%, -1%) }
+      70% { transform: translate(-2%, 2%) }
+      80% { transform: translate(3%, -3%) }
+      90% { transform: translate(-1%, 1%) }
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html { height: 100%; }
+
     body {
-      background: #0A0A0A;
-      color: #F5F0EB;
+      background: #0d0d0d;
+      color: #e8e2db;
       font-family: 'Space Mono', monospace;
-      min-height: 100vh;
+      min-height: 100%;
       display: flex;
       flex-direction: column;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* film grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      animation: grain 8s steps(10) infinite;
+      pointer-events: none;
+      z-index: 1000;
     }
 
     a { color: inherit; }
 
+    ::selection {
+      background: #e8e2db;
+      color: #0d0d0d;
+    }
+
     .page {
-      max-width: 520px;
+      max-width: 480px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 24px;
       width: 100%;
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-top: 80px;
-      padding-bottom: 60px;
+      padding-top: 15vh;
+      padding-bottom: 40px;
     }
 
-    /* Logo / Wordmark */
-    .logo {
-      margin-bottom: 48px;
+    /* ——— WORDMARK ——— */
+    .wordmark {
+      margin-bottom: 56px;
+      user-select: none;
     }
 
-    .logo h1 {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(42px, 10vw, 64px);
-      line-height: 0.95;
+    .wordmark-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 18vw, 110px);
+      line-height: 0.85;
       text-transform: uppercase;
-      letter-spacing: -0.03em;
-      color: #F5F0EB;
+      letter-spacing: -0.02em;
+      color: #e8e2db;
+      position: relative;
     }
 
-    .logo h1 .sub {
+    .wordmark-main span {
       display: block;
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: #666;
-      margin-top: 10px;
     }
 
-    /* One line */
-    .oneliner {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #999;
-      margin-bottom: 48px;
-      max-width: 360px;
+    .wordmark-main .w-bicycles {
+      font-size: 0.72em;
+      letter-spacing: 0.08em;
+      color: #e8e2db;
+      opacity: 0.35;
+      margin-top: -2px;
     }
 
-    /* Links stack */
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      margin-bottom: 48px;
-    }
-
-    .links a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 0;
-      text-decoration: none;
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid #222;
-      transition: color 0.15s;
-    }
-
-    .links a:first-child {
-      border-top: 1px solid #222;
-    }
-
-    .links a:hover {
-      color: #fff;
-    }
-
-    .links a .arrow {
-      font-size: 18px;
-      color: #444;
-      transition: color 0.15s, transform 0.15s;
-    }
-
-    .links a:hover .arrow {
-      color: #F5F0EB;
-      transform: translateX(4px);
-    }
-
-    .links .tag {
+    .wordmark-loc {
       font-family: 'Space Mono', monospace;
       font-size: 10px;
       font-weight: 400;
-      color: #555;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
+      color: #444;
+      margin-top: 16px;
     }
 
-    /* Signup */
-    .signup {
-      margin-bottom: 48px;
-    }
-
-    .signup-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
+    /* ——— TAGLINE ——— */
+    .tagline {
+      font-size: 13px;
       color: #555;
-      margin-bottom: 12px;
+      margin-bottom: 56px;
+      line-height: 1.5;
     }
 
-    .signup-form {
+    /* ——— NAV LINKS ——— */
+    nav {
+      margin-bottom: 56px;
+    }
+
+    nav a {
       display: flex;
-      gap: 0;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-bottom: 1px solid #1a1a1a;
+      transition: all 0.2s ease;
     }
 
-    .signup-form input {
+    nav a:first-child {
+      border-top: 1px solid #1a1a1a;
+    }
+
+    nav a:hover {
+      color: #fff;
+      padding-left: 8px;
+    }
+
+    nav a .meta {
+      font-weight: 400;
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 0.15em;
+    }
+
+    nav a:hover .meta {
+      color: #555;
+    }
+
+    /* ——— EMAIL ——— */
+    .email-block {
+      margin-bottom: 64px;
+    }
+
+    .email-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: #333;
+      margin-bottom: 14px;
+    }
+
+    .email-form {
+      display: flex;
+      border: 1px solid #222;
+      background: transparent;
+      transition: border-color 0.3s;
+    }
+
+    .email-form:focus-within {
+      border-color: #444;
+    }
+
+    .email-form input[type="email"] {
       flex: 1;
-      padding: 14px 16px;
-      background: #141414;
-      border: 1px solid #333;
-      border-right: none;
-      color: #F5F0EB;
+      padding: 16px;
+      background: transparent;
+      border: none;
+      color: #e8e2db;
       font-family: 'Space Mono', monospace;
       font-size: 13px;
       outline: none;
-      transition: border-color 0.2s;
+      min-width: 0;
     }
 
-    .signup-form input::placeholder {
-      color: #444;
+    .email-form input::placeholder {
+      color: #333;
     }
 
-    .signup-form input:focus {
-      border-color: #666;
-    }
-
-    .signup-form button {
-      padding: 14px 20px;
-      background: #F5F0EB;
-      color: #0A0A0A;
-      border: 1px solid #F5F0EB;
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 11px;
+    .email-form button {
+      padding: 16px 24px;
+      background: transparent;
+      color: #555;
+      border: none;
+      border-left: 1px solid #222;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.2em;
       cursor: pointer;
-      transition: opacity 0.15s;
+      transition: color 0.2s, background 0.2s;
       white-space: nowrap;
     }
 
-    .signup-form button:hover {
-      opacity: 0.85;
+    .email-form button:hover {
+      color: #e8e2db;
+      background: #1a1a1a;
     }
 
-    .signup-success {
-      display: none;
-      font-size: 13px;
-      color: #666;
-      margin-top: 10px;
-    }
-
-    /* Trails */
-    .trails {
+    .email-msg {
       font-size: 11px;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
+      color: #444;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* ——— TRAILS ——— */
+    .trails {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 40px;
+    }
+
+    .trails span {
+      font-size: 10px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #333;
-      line-height: 2.2;
+      color: #222;
+      padding: 6px 0;
     }
 
     .trails span::after {
-      content: ' — ';
-      color: #222;
+      content: '\00a0\00a0/\00a0\00a0';
+      color: #1a1a1a;
     }
 
     .trails span:last-child::after {
       content: '';
     }
 
-    /* Footer */
-    footer {
-      padding: 24px 20px;
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #333;
+    /* ——— CHAIN SVG ——— */
+    .chain-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 56px;
+      opacity: 0.12;
     }
 
-    @media (max-width: 480px) {
+    /* ——— FOOTER ——— */
+    footer {
+      padding: 32px 24px;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      text-align: center;
+    }
+
+    /* ——— MOBILE ——— */
+    @media (max-width: 520px) {
       .page {
-        padding-top: 48px;
-        padding-bottom: 40px;
+        padding-top: 10vh;
       }
 
-      .signup-form {
+      .wordmark-main {
+        font-size: clamp(62px, 16vw, 90px);
+      }
+
+      .email-form {
         flex-direction: column;
-        gap: 0;
+        border: none;
       }
 
-      .signup-form input {
-        border-right: 1px solid #333;
+      .email-form input[type="email"] {
+        border: 1px solid #222;
         border-bottom: none;
+        padding: 18px 16px;
       }
 
-      .signup-form button {
-        padding: 16px 20px;
+      .email-form:focus-within input[type="email"] {
+        border-color: #444;
       }
+
+      .email-form button {
+        border: 1px solid #222;
+        border-left: 1px solid #222;
+        padding: 18px 16px;
+        text-align: center;
+      }
+
+      .email-form:focus-within button {
+        border-color: #444;
+      }
+    }
+
+    /* kill all transitions on load */
+    .no-transition * {
+      transition: none !important;
     }
   </style>
 </head>
-<body>
+<body class="no-transition">
 
   <div class="page">
 
-    <div class="logo">
-      <h1>
-        Dirtbag<br>Bicycles
-        <span class="sub">South Orange County, CA</span>
-      </h1>
+    <!-- chainring icon -->
+    <svg class="chain-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="44" stroke="#e8e2db" stroke-width="3"/>
+      <circle cx="50" cy="50" r="16" stroke="#e8e2db" stroke-width="3"/>
+      <circle cx="50" cy="50" r="4" fill="#e8e2db"/>
+      <!-- teeth -->
+      <g stroke="#e8e2db" stroke-width="2.5" stroke-linecap="round">
+        <line x1="50" y1="2" x2="50" y2="10"/>
+        <line x1="73.5" y1="7.7" x2="69.8" y2="15.2"/>
+        <line x1="90.5" y1="26.5" x2="83.5" y2="31"/>
+        <line x1="98" y1="50" x2="90" y2="50"/>
+        <line x1="90.5" y1="73.5" x2="83.5" y2="69"/>
+        <line x1="73.5" y1="92.3" x2="69.8" y2="84.8"/>
+        <line x1="50" y1="98" x2="50" y2="90"/>
+        <line x1="26.5" y1="92.3" x2="30.2" y2="84.8"/>
+        <line x1="9.5" y1="73.5" x2="16.5" y2="69"/>
+        <line x1="2" y1="50" x2="10" y2="50"/>
+        <line x1="9.5" y1="26.5" x2="16.5" y2="31"/>
+        <line x1="26.5" y1="7.7" x2="30.2" y2="15.2"/>
+      </g>
+    </svg>
+
+    <div class="wordmark">
+      <div class="wordmark-main">
+        <span>Dirtbag</span>
+        <span class="w-bicycles">Bicycles</span>
+      </div>
+      <div class="wordmark-loc">so. orange county, ca</div>
     </div>
 
-    <p class="oneliner">Apparel and goods for people who ride dirt.</p>
+    <p class="tagline">cheap bikes. dirty kit. after-work laps.</p>
 
-    <nav class="links">
+    <nav>
       <a href="https://instagram.com/dirtbag.bicycles" target="_blank" rel="noopener">
         <span>Instagram</span>
-        <span class="arrow">&rarr;</span>
+        <span class="meta">@dirtbag.bicycles</span>
       </a>
-      <a href="#" onclick="return false;">
+      <a href="#" onclick="return false">
         <span>Shop</span>
-        <span class="tag">Soon</span>
+        <span class="meta">coming soon</span>
       </a>
-      <a href="#" onclick="return false;">
-        <span>Tees &amp; Shirts</span>
-        <span class="tag">Soon</span>
+      <a href="#" onclick="return false">
+        <span>Tees</span>
+        <span class="meta">soon</span>
       </a>
-      <a href="#" onclick="return false;">
+      <a href="#" onclick="return false">
         <span>Socks</span>
-        <span class="tag">Soon</span>
+        <span class="meta">soon</span>
       </a>
     </nav>
 
-    <div class="signup">
-      <p class="signup-label">Get notified when we drop</p>
-      <form class="signup-form" id="signup-form">
-        <input type="email" name="email" placeholder="email" required>
-        <button type="submit">Submit</button>
+    <div class="email-block">
+      <div class="email-label">first to know</div>
+      <form class="email-form" id="sf">
+        <input type="email" name="email" placeholder="email" autocomplete="email" required>
+        <button type="submit">notify me</button>
       </form>
-      <p class="signup-success" id="signup-success">You're on the list.</p>
+      <div class="email-msg" id="msg"></div>
     </div>
 
     <div class="trails">
@@ -285,11 +387,18 @@
 
   </div>
 
-  <footer>Dirtbag Bicycles</footer>
+  <footer>dirtbag bicycles mmxxvi</footer>
 
   <script>
-    const form = document.getElementById('signup-form');
-    const success = document.getElementById('signup-success');
+    // remove no-transition class after paint
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.body.classList.remove('no-transition');
+      });
+    });
+
+    const form = document.getElementById('sf');
+    const msg = document.getElementById('msg');
     const btn = form.querySelector('button');
 
     form.addEventListener('submit', async (e) => {
@@ -304,15 +413,17 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email })
         });
+
         if (res.ok) {
           form.style.display = 'none';
-          success.style.display = 'block';
+          msg.textContent = 'noted.';
+          msg.style.display = 'block';
         } else {
-          btn.textContent = 'Try again';
+          btn.textContent = 'try again';
           btn.disabled = false;
         }
       } catch {
-        btn.textContent = 'Try again';
+        btn.textContent = 'try again';
         btn.disabled = false;
       }
     });
