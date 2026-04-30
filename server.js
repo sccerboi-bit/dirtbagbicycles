@@ -38,7 +38,12 @@ app.post('/api/signup', (req, res) => {
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Fallback to index
+// Root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
