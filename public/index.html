@@ -3,335 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>dirtbag bicycles</title>
-  <meta name="description" content="SoCal MTB for riders who'd rather ride janky than wait for perfect.">
+  <title>DIRTBAG BICYCLES</title>
+  <meta name="description" content="Dirtbag Bicycles. South Orange County, CA. Apparel and MTB.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --dirt: #2C2418;
-      --clay: #8B6914;
-      --dust: #C4A265;
-      --sage: #5C6B4F;
-      --rust: #9B3D2B;
-      --bone: #E8DCC8;
-      --offwhite: #F2EDE4;
-      --black: #1A1611;
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: var(--offwhite);
-      color: var(--dirt);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
+      background: #0A0A0A;
+      color: #F5F0EB;
+      font-family: 'Space Mono', monospace;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Grain overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1000;
-    }
+    a { color: inherit; }
 
-    .container {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 0 24px;
-      width: 100%;
-    }
-
-    /* Header */
-    header {
-      padding: 60px 0 20px;
-      text-align: center;
-    }
-
-    .wordmark {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: clamp(48px, 12vw, 80px);
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      line-height: 0.9;
-      color: var(--black);
-    }
-
-    .wordmark span {
-      display: block;
-      font-size: 0.45em;
-      letter-spacing: 0.25em;
-      color: var(--rust);
-      font-weight: 400;
-    }
-
-    .tagline {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--sage);
-      margin-top: 16px;
-      letter-spacing: 0.02em;
-    }
-
-    /* Divider */
-    .divider {
-      border: none;
-      height: 2px;
-      background: var(--dirt);
-      margin: 32px auto;
-      max-width: 80px;
-    }
-
-    /* Main content */
-    main {
-      flex: 1;
-      padding: 20px 0 40px;
-    }
-
-    .manifesto {
-      font-size: 18px;
-      line-height: 1.7;
-      color: var(--dirt);
+    .page {
       max-width: 520px;
       margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+      padding-bottom: 60px;
     }
 
-    .manifesto p {
-      margin-bottom: 20px;
+    /* Logo / Wordmark */
+    .logo {
+      margin-bottom: 48px;
     }
 
-    .manifesto strong {
-      color: var(--black);
-    }
-
-    /* Trail list */
-    .trails {
-      font-family: 'Oswald', sans-serif;
-      font-size: 13px;
+    .logo h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(42px, 10vw, 64px);
+      line-height: 0.95;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--dust);
-      text-align: center;
-      margin: 40px 0;
-      line-height: 2;
+      letter-spacing: -0.03em;
+      color: #F5F0EB;
     }
 
-    .trails span {
-      margin: 0 8px;
+    .logo h1 .sub {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    /* One line */
+    .oneliner {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #999;
+      margin-bottom: 48px;
+      max-width: 360px;
+    }
+
+    /* Links stack */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-bottom: 48px;
+    }
+
+    .links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      text-decoration: none;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #222;
+      transition: color 0.15s;
+    }
+
+    .links a:first-child {
+      border-top: 1px solid #222;
+    }
+
+    .links a:hover {
+      color: #fff;
+    }
+
+    .links a .arrow {
+      font-size: 18px;
+      color: #444;
+      transition: color 0.15s, transform 0.15s;
+    }
+
+    .links a:hover .arrow {
+      color: #F5F0EB;
+      transform: translateX(4px);
+    }
+
+    .links .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      color: #555;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Signup */
+    .signup {
+      margin-bottom: 48px;
+    }
+
+    .signup-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 0;
+    }
+
+    .signup-form input {
+      flex: 1;
+      padding: 14px 16px;
+      background: #141414;
+      border: 1px solid #333;
+      border-right: none;
+      color: #F5F0EB;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .signup-form input::placeholder {
+      color: #444;
+    }
+
+    .signup-form input:focus {
+      border-color: #666;
+    }
+
+    .signup-form button {
+      padding: 14px 20px;
+      background: #F5F0EB;
+      color: #0A0A0A;
+      border: 1px solid #F5F0EB;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+
+    .signup-form button:hover {
+      opacity: 0.85;
+    }
+
+    .signup-success {
+      display: none;
+      font-size: 13px;
+      color: #666;
+      margin-top: 10px;
+    }
+
+    /* Trails */
+    .trails {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #333;
+      line-height: 2.2;
     }
 
     .trails span::after {
-      content: ' /';
-      color: var(--clay);
+      content: ' — ';
+      color: #222;
     }
 
     .trails span:last-child::after {
       content: '';
     }
 
-    /* Email signup */
-    .signup-section {
-      background: var(--dirt);
-      padding: 48px 24px;
-      text-align: center;
-      margin: 40px 0;
-    }
-
-    .signup-section h2 {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      text-transform: uppercase;
-      color: var(--bone);
-      margin-bottom: 8px;
-    }
-
-    .signup-section p {
-      color: var(--dust);
-      font-size: 14px;
-      margin-bottom: 24px;
-    }
-
-    .signup-form {
-      display: flex;
-      gap: 8px;
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .signup-form input[type="email"] {
-      flex: 1;
-      padding: 12px 16px;
-      border: 2px solid var(--clay);
-      background: transparent;
-      color: var(--bone);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .signup-form input[type="email"]::placeholder {
-      color: var(--clay);
-    }
-
-    .signup-form input[type="email"]:focus {
-      border-color: var(--bone);
-    }
-
-    .signup-form button {
-      padding: 12px 24px;
-      background: var(--rust);
-      color: var(--bone);
-      border: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      transition: background 0.2s;
-      white-space: nowrap;
-    }
-
-    .signup-form button:hover {
-      background: #B8482F;
-    }
-
-    .signup-success {
-      display: none;
-      color: var(--sage);
-      font-size: 14px;
-      margin-top: 12px;
-    }
-
-    /* IG link */
-    .ig-section {
-      text-align: center;
-      padding: 32px 0;
-    }
-
-    .ig-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--dirt);
-      text-decoration: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 12px 28px;
-      border: 2px solid var(--dirt);
-      transition: all 0.2s;
-    }
-
-    .ig-link:hover {
-      background: var(--dirt);
-      color: var(--bone);
-    }
-
-    .ig-link svg {
-      width: 20px;
-      height: 20px;
-    }
-
     /* Footer */
     footer {
-      padding: 32px 0;
+      padding: 24px 20px;
       text-align: center;
-      font-size: 12px;
-      color: var(--dust);
-      letter-spacing: 0.05em;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #333;
     }
 
-    footer span {
-      color: var(--clay);
-    }
-
-    /* Mobile */
     @media (max-width: 480px) {
-      header { padding: 40px 0 16px; }
+      .page {
+        padding-top: 48px;
+        padding-bottom: 40px;
+      }
 
       .signup-form {
         flex-direction: column;
+        gap: 0;
+      }
+
+      .signup-form input {
+        border-right: 1px solid #333;
+        border-bottom: none;
       }
 
       .signup-form button {
-        padding: 14px 24px;
-      }
-
-      .trails span {
-        display: inline;
-        margin: 0 4px;
+        padding: 16px 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <h1 class="wordmark">
-        Dirtbag
-        <span>Bicycles</span>
+  <div class="page">
+
+    <div class="logo">
+      <h1>
+        Dirtbag<br>Bicycles
+        <span class="sub">South Orange County, CA</span>
       </h1>
-      <p class="tagline">South Orange County, CA</p>
-    </div>
-  </header>
-
-  <hr class="divider">
-
-  <main>
-    <div class="container">
-      <div class="manifesto">
-        <p>Bought a $750 hardtail. Spent $1500 making it worse. Converted it to a mullet because why not. The fork costs more than the frame and that's fine.</p>
-        <p>Not a brand. Not a team. Just a guy in SoCal who rides before work and talks too much about tires.</p>
-        <p>If you're out here on something dumb with dirt in your teeth, you're one of us.</p>
-      </div>
-
-      <div class="trails">
-        <span>Aliso Woods</span>
-        <span>Las Ramblas</span>
-        <span>Laguna</span>
-        <span>San Clemente</span>
-        <span>Black Star</span>
-      </div>
     </div>
 
-    <section class="signup-section">
-      <div class="container">
-        <h2>Merch eventually</h2>
-        <p>Tees. Stickers. Socks. A bag of actual dirt. Leave your email if you want first dibs.</p>
-        <form class="signup-form" id="signup-form">
-          <input type="email" name="email" placeholder="your@email.com" required>
-          <button type="submit">I'm in</button>
-        </form>
-        <p class="signup-success" id="signup-success">Got it. We'll holler when it drops.</p>
-      </div>
-    </section>
+    <p class="oneliner">Apparel and goods for people who ride dirt.</p>
 
-    <div class="ig-section">
-      <a href="https://instagram.com/dirtbag.bicycles" target="_blank" rel="noopener" class="ig-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        @dirtbag.bicycles
+    <nav class="links">
+      <a href="https://instagram.com/dirtbag.bicycles" target="_blank" rel="noopener">
+        <span>Instagram</span>
+        <span class="arrow">&rarr;</span>
       </a>
-    </div>
-  </main>
+      <a href="#" onclick="return false;">
+        <span>Shop</span>
+        <span class="tag">Soon</span>
+      </a>
+      <a href="#" onclick="return false;">
+        <span>Tees &amp; Shirts</span>
+        <span class="tag">Soon</span>
+      </a>
+      <a href="#" onclick="return false;">
+        <span>Socks</span>
+        <span class="tag">Soon</span>
+      </a>
+    </nav>
 
-  <footer>
-    <div class="container">
-      <span>dirtbag bicycles</span> / South OC, CA
+    <div class="signup">
+      <p class="signup-label">Get notified when we drop</p>
+      <form class="signup-form" id="signup-form">
+        <input type="email" name="email" placeholder="email" required>
+        <button type="submit">Submit</button>
+      </form>
+      <p class="signup-success" id="signup-success">You're on the list.</p>
     </div>
-  </footer>
+
+    <div class="trails">
+      <span>Aliso Woods</span>
+      <span>Las Ramblas</span>
+      <span>Laguna</span>
+      <span>San Clemente</span>
+      <span>Black Star</span>
+    </div>
+
+  </div>
+
+  <footer>Dirtbag Bicycles</footer>
 
   <script>
     const form = document.getElementById('signup-form');
