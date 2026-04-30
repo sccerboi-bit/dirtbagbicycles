@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dirtbag bicycles</title>
+  <meta name="description" content="SoCal MTB for riders who'd rather ride janky than wait for perfect.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dirt: #2C2418;
+      --clay: #8B6914;
+      --dust: #C4A265;
+      --sage: #5C6B4F;
+      --rust: #9B3D2B;
+      --bone: #E8DCC8;
+      --offwhite: #F2EDE4;
+      --black: #1A1611;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--offwhite);
+      color: var(--dirt);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 20px;
+      text-align: center;
+    }
+
+    .wordmark {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(48px, 12vw, 80px);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.9;
+      color: var(--black);
+    }
+
+    .wordmark span {
+      display: block;
+      font-size: 0.45em;
+      letter-spacing: 0.25em;
+      color: var(--rust);
+      font-weight: 400;
+    }
+
+    .tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--sage);
+      margin-top: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      height: 2px;
+      background: var(--dirt);
+      margin: 32px auto;
+      max-width: 80px;
+    }
+
+    /* Main content */
+    main {
+      flex: 1;
+      padding: 20px 0 40px;
+    }
+
+    .manifesto {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--dirt);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .manifesto p {
+      margin-bottom: 20px;
+    }
+
+    .manifesto strong {
+      color: var(--black);
+    }
+
+    /* Trail list */
+    .trails {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--dust);
+      text-align: center;
+      margin: 40px 0;
+      line-height: 2;
+    }
+
+    .trails span {
+      margin: 0 8px;
+    }
+
+    .trails span::after {
+      content: ' /';
+      color: var(--clay);
+    }
+
+    .trails span:last-child::after {
+      content: '';
+    }
+
+    /* Email signup */
+    .signup-section {
+      background: var(--dirt);
+      padding: 48px 24px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .signup-section h2 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      text-transform: uppercase;
+      color: var(--bone);
+      margin-bottom: 8px;
+    }
+
+    .signup-section p {
+      color: var(--dust);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 8px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .signup-form input[type="email"] {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid var(--clay);
+      background: transparent;
+      color: var(--bone);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .signup-form input[type="email"]::placeholder {
+      color: var(--clay);
+    }
+
+    .signup-form input[type="email"]:focus {
+      border-color: var(--bone);
+    }
+
+    .signup-form button {
+      padding: 12px 24px;
+      background: var(--rust);
+      color: var(--bone);
+      border: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .signup-form button:hover {
+      background: #B8482F;
+    }
+
+    .signup-success {
+      display: none;
+      color: var(--sage);
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    /* IG link */
+    .ig-section {
+      text-align: center;
+      padding: 32px 0;
+    }
+
+    .ig-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--dirt);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 12px 28px;
+      border: 2px solid var(--dirt);
+      transition: all 0.2s;
+    }
+
+    .ig-link:hover {
+      background: var(--dirt);
+      color: var(--bone);
+    }
+
+    .ig-link svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--dust);
+      letter-spacing: 0.05em;
+    }
+
+    footer span {
+      color: var(--clay);
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      header { padding: 40px 0 16px; }
+
+      .signup-form {
+        flex-direction: column;
+      }
+
+      .signup-form button {
+        padding: 14px 24px;
+      }
+
+      .trails span {
+        display: inline;
+        margin: 0 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1 class="wordmark">
+        Dirtbag
+        <span>Bicycles</span>
+      </h1>
+      <p class="tagline">SoCal MTB for riders who'd rather ride janky than wait for perfect.</p>
+    </div>
+  </header>
+
+  <hr class="divider">
+
+  <main>
+    <div class="container">
+      <div class="manifesto">
+        <p>We ride what we have. Budget hardtails with too many upgrades. Mullet conversions nobody asked for. Forks that cost more than the frame.</p>
+        <p>No sponsors. No content calendar. No $12k builds. Just dirt under fingernails and trails after work.</p>
+        <p>Based in Vista and South OC. Riding Aliso, Laguna, Las Ramblas, and whatever else is close enough to hit before dark.</p>
+      </div>
+
+      <div class="trails">
+        <span>Aliso Woods</span>
+        <span>Las Ramblas</span>
+        <span>Laguna</span>
+        <span>San Clemente</span>
+        <span>Black Star</span>
+      </div>
+    </div>
+
+    <section class="signup-section">
+      <div class="container">
+        <h2>Merch is coming</h2>
+        <p>Tees, stickers, socks, and at least one product that shouldn't exist. Drop your email.</p>
+        <form class="signup-form" id="signup-form">
+          <input type="email" name="email" placeholder="your@email.com" required>
+          <button type="submit">I'm in</button>
+        </form>
+        <p class="signup-success" id="signup-success">Got it. We'll holler when it drops.</p>
+      </div>
+    </section>
+
+    <div class="ig-section">
+      <a href="https://instagram.com/dirtbag.bicycles" target="_blank" rel="noopener" class="ig-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @dirtbag.bicycles
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>dirtbag bicycles</span> / Vista & South OC, CA
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const success = document.getElementById('signup-success');
+    const btn = form.querySelector('button');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = form.querySelector('input[type="email"]').value;
+      btn.textContent = '...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          btn.textContent = 'Try again';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
